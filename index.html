@@ -42,7 +42,32 @@ color:white;
 box-shadow:0 6px 16px rgba(0,0,0,.12);
 font-size:14px;
 }
+.slogan{
+font-weight:900;
+color:#1f4fd8;
+margin:20px 0;
+letter-spacing:.3px;
+animation:fadeGlow 3s ease-in-out infinite;
+text-align:center;
+}
 
+@keyframes fadeGlow{
+0%{
+opacity:.6;
+transform:translateY(6px);
+text-shadow:none;
+}
+50%{
+opacity:1;
+transform:translateY(0);
+text-shadow:0 0 12px rgba(31,79,216,.35);
+}
+100%{
+opacity:.6;
+transform:translateY(6px);
+text-shadow:none;
+}
+}
 .blue{background:#1f4fd8}
 .green{background:#16a34a}
 .pink{background:#ff2d55}
@@ -135,11 +160,14 @@ z-index:9999;
 <span class="pill">Physique</span>
 <span class="pill">Chimie</span>
 </div>
-
+<h2>
+Extension future prévue : cours de langues (allemand, italien, espagnol, anglais) et synthèse vocale intégrée
+</h2>
 <h2>Ny fianarana no lova tsara indrindra.</h2>
 
 <a class="bigbtn pink" href="https://www.axokit.com" target="_blank">Découvrir l’application</a>
 <a class="bigbtn blue" href="accord.html">📜 Accord-cadre national</a>
+<a class="bigbtn blue" href="presentation.html">🌍 Présentation globale</a>
 <a class="btn" href="plan-national.html"> Plan national</a>
 <a class="btn" href="lycees-colleges.html"> Lycées & collèges privés</a>
 <a class="btn" href="maintenance.html">Guide de maintenance</a>
@@ -218,4 +246,5 @@ Former aujourd’hui les talents de demain
 
 </body>
 </html>
+
 
