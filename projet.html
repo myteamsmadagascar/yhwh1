@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>PROJET — STATION IA SCIENTIFIQUE (OFFLINE)</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root{
+      --gold:#d4af37; --gold2:#ffe7a4;
+      --red:#c1121f; --red2:#ff3b3b;
+      --blue:#2563eb; --blue2:#4fd1ff;
+      --green:#16a34a; --green2:#4ade80;
+
+      --bg1:#f8fbff; --bg2:#edf1ff;
+      --ink:#0b1220;
+      --muted:rgba(11,18,32,.70);
+      --stroke:rgba(15,23,42,.12);
+      --card:rgba(255,255,255,.90);
+      --shadow:0 30px 120px rgba(0,0,0,.10);
+      --r:28px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--ink);
+      background:
+        radial-gradient(1000px 520px at 10% 8%, rgba(37,99,235,.16), transparent 62%),
+        radial-gradient(1000px 520px at 88% 12%, rgba(212,175,55,.18), transparent 62%),
+        radial-gradient(1000px 520px at 78% 90%, rgba(22,163,74,.14), transparent 60%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      min-height:100vh;
+    }
+    .wrap{max-width:1280px;margin:0 auto;padding:18px 14px 54px}
+
+    /* top nav */
+    .topbar{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+      margin-bottom:14px;
+      position:sticky; top:0; z-index:50;
+      padding:10px 0;
+      backdrop-filter: blur(10px);
+    }
+    .btn{
+      appearance:none;border:0;cursor:pointer;text-decoration:none;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 16px;border-radius:16px;font-weight:900;
+      transition:transform .18s ease, filter .18s ease, box-shadow .18s ease;
+      user-select:none;white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px);filter:saturate(1.05)}
+    .btn:active{transform:translateY(0) scale(.99)}
+    .btn-outline{
+      background:rgba(255,255,255,.70);
+      border:1px solid var(--stroke);
+      color:var(--ink);
+      box-shadow:0 10px 26px rgba(0,0,0,.06);
+    }
+    .btn-red{color:#fff;background:linear-gradient(135deg,var(--red),var(--red2));box-shadow:0 16px 40px rgba(193,18,31,.22)}
+    .btn-gold{color:#1a1a1a;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 16px 40px rgba(212,175,55,.18)}
+    .btn-blue{color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 16px 40px rgba(37,99,235,.18)}
+    .btn-green{color:#063312;background:linear-gradient(135deg,var(--green2),rgba(255,255,255,.92));border:1px solid rgba(22,163,74,.35);box-shadow:0 16px 40px rgba(22,163,74,.12)}
+
+    /* main card */
+    .card{
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(12px);
+    }
+    .hero{
+      padding:26px 24px 16px;
+      display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+      border-bottom:1px solid var(--stroke);
+      background:linear-gradient(135deg, rgba(255,255,255,.86), rgba(255,255,255,.32));
+    }
+    .logo{
+      width:80px;height:80px;border-radius:20px;
+      background:rgba(255,255,255,.76);
+      border:1px solid var(--stroke);
+      box-shadow:0 12px 26px rgba(0,0,0,.08);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .logo img{width:100%;height:100%;object-fit:contain;padding:10px}
+    h1{margin:0;font-size:22px;line-height:1.15;font-weight:1000;color:var(--red)}
+    .subtitle{margin-top:7px;font-weight:800;color:var(--muted)}
+    .chips{padding:12px 24px; display:flex; flex-wrap:wrap; gap:8px}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.74);
+      font-weight:900; font-size:12.8px; color:rgba(11,18,32,.72);
+    }
+
+    /* top wow area */
+    .content{padding:10px 24px 26px}
+    .grid2{display:grid;grid-template-columns:1.08fr .92fr;gap:14px;align-items:stretch}
+    .panel{
+      background:rgba(255,255,255,.80);
+      border:1px solid var(--stroke);
+      border-radius:24px;
+      padding:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:linear-gradient(135deg, rgba(37,99,235,.12), rgba(212,175,55,.12), rgba(22,163,74,.10));
+      filter:blur(18px);
+      opacity:.55;
+      z-index:0;
+    }
+    .panel > *{position:relative; z-index:1}
+    .panel h3{
+      margin:0 0 10px 0;
+      font-size:13px;
+      letter-spacing:.24px;
+      text-transform:uppercase;
+      font-weight:1000;
+    }
+    .h-blue{color:var(--blue)}
+    .h-gold{color:var(--gold)}
+    .h-green{color:var(--green)}
+    .h-red{color:var(--red)}
+
+    /* stats */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:12px;
+      margin:10px 0 0;
+    }
+    .stat{
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(15,23,42,.10);
+      border-radius:20px;
+      padding:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      text-align:center;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .stat:hover{transform:translateY(-2px); box-shadow:0 18px 46px rgba(0,0,0,.10)}
+    .num{font-size:34px;font-weight:1000;letter-spacing:-.6px;margin-bottom:4px}
+    .lbl{font-weight:900;color:rgba(11,18,32,.70);font-size:12.6px}
+    .num.gold{color:var(--gold)} .num.red{color:var(--red)} .num.blue{color:var(--blue)} .num.green{color:var(--green)}
+
+    /* timeline futuristic */
+    .timeline{
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    .step{
+      border-radius:18px;
+      padding:12px 12px;
+      border:1px solid rgba(15,23,42,.10);
+      background:rgba(255,255,255,.78);
+      box-shadow:0 10px 26px rgba(0,0,0,.06);
+      font-weight:950;
+      color:rgba(11,18,32,.78);
+      position:relative;
+      overflow:hidden;
+      min-height:64px;
+      display:flex;
+      align-items:center;
+    }
+    .step:after{
+      content:"";
+      position:absolute; inset:-2px;
+      background:linear-gradient(135deg, rgba(212,175,55,.22), rgba(37,99,235,.14), rgba(22,163,74,.12));
+      opacity:.0;
+      transition:opacity .22s ease;
+    }
+    .step:hover:after{opacity:.55}
+    .step span{position:relative; z-index:1}
+
+    /* document sections */
+    .doc{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    .section{
+      background:rgba(255,255,255,.82);
+      border:1px solid var(--stroke);
+      border-radius:26px;
+      padding:18px 18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .section:before{
+      content:"";
+      position:absolute; left:0; top:0; bottom:0;
+      width:6px;
+      background:linear-gradient(180deg,var(--gold),rgba(212,175,55,.16));
+      border-radius:26px 0 0 26px;
+    }
+    .stitle{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .stitle h2{
+      margin:0;
+      font-size:16px;
+      font-weight:1000;
+      color:var(--blue);
+      letter-spacing:.1px;
+    }
+    .tag{
+      font-size:12px;
+      font-weight:1000;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.12);
+      background:rgba(255,255,255,.70);
+      color:rgba(11,18,32,.72);
+    }
+    .tag.gold{border-color:rgba(212,175,55,.32); color:#7a5a00}
+    .tag.red{border-color:rgba(193,18,31,.26); color:var(--red)}
+    .tag.green{border-color:rgba(22,163,74,.26); color:var(--green)}
+    .tag.blue{border-color:rgba(37,99,235,.26); color:var(--blue)}
+
+    .para{margin:0 0 10px 0; font-size:14.6px; line-height:1.82; color:rgba(11,18,32,.88)}
+    .list{margin:8px 0 12px 20px; padding:0}
+    .list li{margin:6px 0; font-size:14.6px; line-height:1.78; color:rgba(11,18,32,.88)}
+    .quote{
+      margin:10px 0 6px;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid rgba(15,23,42,.10);
+      background:linear-gradient(135deg, rgba(37,99,235,.06), rgba(212,175,55,.06));
+      color:rgba(11,18,32,.88);
+      font-weight:700;
+      line-height:1.78;
+      font-size:14.4px;
+    }
+
+    /* futuristic table */
+    .ftable{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(15,23,42,.14);
+      background:rgba(255,255,255,.88);
+      box-shadow:0 18px 50px rgba(0,0,0,.08);
+      margin-top:12px;
+    }
+    .ftable th, .ftable td{
+      padding:12px 12px;
+      border-bottom:1px solid rgba(15,23,42,.10);
+      border-right:1px solid rgba(15,23,42,.08);
+      font-size:14.3px;
+      line-height:1.65;
+      vertical-align:top;
+    }
+    .ftable th{
+      font-weight:1000;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.10), rgba(212,175,55,.12));
+      color:rgba(11,18,32,.86);
+    }
+    .ftable tr:last-child td{border-bottom:0}
+    .ftable th:last-child, .ftable td:last-child{border-right:0}
+    .ftable tbody tr{
+      transition:transform .18s ease, background .18s ease;
+    }
+    .ftable tbody tr:hover{
+      background:rgba(79,209,255,.08);
+      transform:translateX(2px);
+    }
+
+    .footer{
+      padding:14px 24px;
+      border-top:1px solid var(--stroke);
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:space-between;
+      color:rgba(11,18,32,.65);
+      font-size:13px;
+      background:rgba(255,255,255,.65);
+      font-weight:900;
+    }
+
+    /* reveal */
+    .reveal{opacity:0; transform:translateY(10px); transition:opacity .55s ease, transform .55s ease}
+    .reveal.in{opacity:1; transform:none}
+
+    @media (max-width: 1000px){
+      .grid2{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(2, minmax(0,1fr))}
+      .timeline{grid-template-columns:1fr 1fr}
+      .content{padding:10px 14px 22px}
+      .hero{padding:22px 14px 12px}
+      .chips{padding:12px 14px}
+      h1{font-size:19px}
+    }
+    @media print{
+      .topbar{display:none !important}
+      .card{box-shadow:none}
+      .panel:before, .step:after{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <a class="btn btn-outline" href="index.html">🏠 Accueil</a>
+      <a class="btn btn-gold" href="lettre.html">📄 Lire la lettre</a>
+      <a class="btn btn-green" href="pc.html">🖥️ Les ordinateurs requises</a>
+      <button class="btn btn-red" onclick="downloadPDF()">⬇ Télécharger PDF</button>
+      <a class="btn btn-blue" href="StationIA.pptx" target="_blank" rel="noopener">📊 Lire PowerPoint</a>
+    </div>
+
+    <div class="card" id="pdfArea">
+
+      <div class="hero">
+        <div class="logo"><img src="logoaxokit.png" alt="Axokit"></div>
+        <div>
+          <h1>PROJET : STATION IA SCIENTIFIQUE (OFFLINE)</h1>
+          <div class="subtitle">L’excellence pédagogique en Mathématiques et Physique-Chimie au cœur des établissements</div>
+        </div>
+      </div>
+
+      <div class="chips">
+        <span class="chip">Axokit au service de la nation</span>
+        <span class="chip">IA 100 % Offline</span>
+        <span class="chip">Mathématiques / Physique/ Chimie</span>
+        <span class="chip">BEPC / BAC</span>
+        <span class="chip">Borne de Savoir</span>
+      </div>
+
+      <div class="content">
+
+        <div class="panel reveal">
+          <h3 class="h-green">Indicateurs clés (animés)</h3>
+          <div class="stats">
+            <div class="stat">
+              <div class="num gold" data-count="3.5" data-suffix=" €">0</div>
+              <div class="lbl">Coût annuel / élève</div>
+            </div>
+            <div class="stat">
+              <div class="num blue" data-count="300" data-suffix="">0</div>
+              <div class="lbl">Exemple : élèves / établissement</div>
+            </div>
+            <div class="stat">
+              <div class="num green" data-count="100" data-suffix="%">0</div>
+              <div class="lbl">Fonctionnement Offline</div>
+            </div>
+            <div class="stat">
+              <div class="num red" data-count="1050" data-suffix=" €">0</div>
+              <div class="lbl">Exemple : budget annuel (300)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid2" style="margin-top:14px">
+          <div class="panel reveal">
+            <h3 class="h-blue">Diagramme financier</h3>
+            <canvas id="financeChart" height="240"></canvas>
+          </div>
+          <div class="panel reveal">
+            <h3 class="h-gold">Timeline (vision claire & directe)</h3>
+            <div class="timeline">
+              <div class="step"><span>ANNÉE 1 – Installation & Équipement initial</span></div>
+              <div class="step"><span>ANNÉE 2 ET ANNÉES SUIVANTES – Service & Extension</span></div>
+              <div class="step"><span>Trajectoire de Réussite (6ème à la Terminale)</span></div>
+              <div class="step"><span>L’Argument du Futur : Le Télétravail International</span></div>
+              <div class="step"><span>Vision 2030 : Construire une nation de talents numériques</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LE DOCUMENT (tout visible, texte soigné, mots inchangés) -->
+        <div id="doc" class="doc"></div>
+
+      </div>
+
+      <div class="footer">
+        <div>Axokit — Station IA Scientifique (Offline)</div>
+        <div>Affichage intégral • Animations • Diagramme • Tableaux futuristes • PDF</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TEXTE SOURCE (inchangé) -->
+  <script id="rawText" type="text/plain">
+PROJET : STATION IA SCIENTIFIQUE (OFFLINE)
+L’excellence pédagogique en Mathématiques et Physique au cœur des établissements
+
+1. MODÈLE DE FINANCEMENT PARTAGÉ
+Le projet repose sur un coût annuel total maîtrisé de 3,50 € par élève, entièrement pris en charge par l’État, afin de garantir un accès équitable et durable à l’innovation pédagogique.
+Ce financement est structuré de manière stratégique pour permettre à la fois :
+•	L’équipement matériel des établissements,
+•	Et la fourniture du service logiciel IA.
+ Répartition annuelle du financement (par élève)
+•	ÉTAT – Équipement et modernisation : 2,00 € / élève / an
+(≈ 7 500 Ariary)
+•	SOCIÉTÉ – Licence logicielle IA & installation : 1,50 € / élève / an
+ Total : 3,50 € / élève / an
+
+2. STRATÉGIE D’ÉQUIPEMENT ET MONTÉE EN PUISSANCE
+Le modèle est conçu pour équiper progressivement les établissements, sans aucune avance de trésorerie de la part de la société.
+
+ ANNÉE 1 – Installation & Équipement initial
+La première année est consacrée à l’installation de la Station IA Scientifique (Borne de Savoir).
+Exemple pour un établissement de 300 élèves :
+•	Budget total annuel
+ 3,50 € × 300 élèves = 1 050 €
+Répartition concrète :
+🖥️Part ÉTAT – Équipement matériel
+•	2,00 € × 300 élèves = 600 €
+•	Affectée à :
+o	L’achat d’un ordinateur performant (neuf ou reconditionné haut de gamme),
+o	Le mobilier et la sécurisation.
+Note : Grâce aux achats en volume auprès de grossistes, 400 à 600 € permettent d’acquérir un ordinateur suffisamment puissant pour faire fonctionner l’IA localement, de manière fluide, avec un écran large adapté au travail de groupe.
+ Part SOCIÉTÉ – Logiciel & installation
+•	1,50 € × 300 élèves = 450 €
+•	Correspond à :
+o	La licence annuelle de l’application IA,
+o	L’installation,
+o	La configuration pédagogique initiale.
+
+ ANNÉE 2 ET ANNÉES SUIVANTES – Service & Extension
+Une fois le premier équipement installé, le modèle devient encore plus avantageux.
+Service logiciel (constant)
+•	1,50 € / élève / an, versés à la société :
+o	Mises à jour de l’IA,
+o	Maintenance logicielle,
+o	Support pédagogique et technique.
+ Pour 300 élèves : 450 € / an
+Extension possible de l’équipement (optionnelle)
+•	L’État peut, s’il le souhaite, continuer à financer :
+o	De nouveaux ordinateurs,
+o	Afin d’augmenter le temps d’utilisation par élève et par semaine,
+o	Sans modification du coût logiciel.
+ Le financement matériel reste progressif, modulable et maîtrisé.
+
+3. POINTS CLÉS POUR L’ÉTAT
+✔️ Aucun investissement initial lourd
+✔️ Coût annuel extrêmement faible par élève
+✔️ Équipement durable et réutilisable
+✔️ IA 100 % offline, sécurisée et adaptée aux contextes scolaires
+✔️ Complément direct de l’enseignement, sans remplacement des professeurs
+
+ Synthèse politique
+Pour 3,50 € par élève et par an, l’État modernise ses établissements, équipe durablement ses écoles et offre un soutien scientifique de haut niveau à l’ensemble des élèves.
+
+
+
+4. FONCTIONNEMENT : LA "BORNE DE SAVOIR"
+Contrairement aux solutions web classiques, notre technologie s'adapte à la réalité infrastructurelle de Madagascar :
+•	Installation Locale : L'IA est installée directement sur l'ordinateur physique dans une salle dédiée au sein de l'établissement.
+•	Accès Illimité : Pas besoin de connexion internet ni de crédit data. L'outil est disponible à tout moment, éliminant les barrières liées au réseau.
+•	Parcours de réussite : Les élèves consultent l'IA par petits groupes pour résoudre des exercices de Maths/Physique, poser des questions sur le cours ou s'entraîner intensivement aux examens nationaux (BEPC/BAC).
+Le Besoin Réel (Statistique) pour 1 ordinateur et 300 élèves
+Dans une école, tout le monde n'utilise pas l'IA en même temps. Les besoins se répartissent ainsi :
+•	Les "Performeurs" (20%) : Utilisent l'IA chaque semaine pour approfondir (60 élèves).
+•	Les "En Difficulté" (30%) : Utilisent l'IA ponctuellement avant un contrôle (90 élèves).
+•	Le "Flux Passif" (50%) : Utilisent l'IA rarement ou uniquement lors de séances collectives.
+Optimisation : Un seul ordinateur suffit car l'IA répond instantanément. Ce n'est pas comme un cours magistral, c'est une consultation rapide et efficace.
+Capacité réelle optimisée : En favorisant le travail par groupes de 3 élèves (méthode la plus efficace pour l'IA) :
+1.	Le nombre de "sessions" passe de 300 à 100 groupes.
+2.	Statistiquement : À tout moment, seuls 15% à 20% des élèves ont un besoin urgent (exercice bloqué, révision d'examen). En lissant les passages sur la semaine, chaque élève ayant un besoin réel peut bénéficier de 30 à 45 minutes de tutorat ciblé, ce qui est largement suffisant pour débloquer un problème de Maths ou de Physique.
+
+
+Exemple de planning scolaire
+L'idée est de répartir les classes par créneaux, tout en gardant des moments de "libre-service" pour les urgences (devoirs à rendre, examens).
+1. Stratégie de répartition (Base : 300 élèves)
+On divise les 300 élèves en 10 groupes de 30 élèves (correspondant à environ 10 classes ou demi-classes).
+•	Temps total : 40 heures (8h - 12h / 13h - 17h).
+•	Priorité : Travail par groupes de 3 devant l'écran (collaboration active).
+ 
+2. Planning Hebdomadaire Type
+Heures	Lundi	Mardi	Mercredi	Jeudi	Vendredi
+08h - 10h	3ème A	Terminale S	4ème A	1ère S	3ème B
+10h - 12h	1ère S	3ème B	Libre-service	3ème A	Terminale S
+12h - 13h	Maintenance	Pause	Pause	Pause	Pause
+13h - 15h	4ème A	Libre-service	3ème A	4ème B	1ère S
+15h - 17h	Libre-service	4ème B	Terminale S	Libre-service	4ème A
+•	Classes dédiées : Chaque classe dispose de 4 heures réservées par semaine.
+•	Libre-service (8h/semaine) : Ouvert à tout élève, quelle que soit sa classe, pour une question rapide ou un blocage sur un exercice spécifique.
+ 
+3. Calcul de la fluidité (Statistique)
+Pendant les 2 heures dédiées à une classe (30 élèves) :
+•	Les élèves forment 10 groupes de 3.
+•	Sur 120 minutes (2h), chaque groupe peut passer 12 minutes en tête-à-tête intensif avec l'IA.
+•	Réalité du besoin : Comme vous l'avez souligné, tous les élèves n'ont pas besoin de l'IA au même moment. Sur 10 groupes, généralement seulement 4 ou 5 ont des questions précises. Cela permet aux groupes qui en ont besoin de rester 25 à 30 minutes sur la machine, ce qui est le temps idéal pour résoudre un problème complexe de physique ou de maths.
+
+4.Les élèves forment 10 groupes de 3. L'Extension Visuelle (L'Auditorium) : Un vidéoprojecteur retransmet en temps réel le travail d'un ou plusieurs groupes sur grand écran. Les 27 autres élèves suivent la démonstration, analysent les erreurs et profitent des explications collectives.
+
+5. ARGUMENTS STRATÉGIQUES
+•	Pour l'État : Un moyen de numériser les écoles à moindre coût (1,50 €/élève) tout en luttant contre l'échec scolaire dans les matières critiques.
+•	Pour les Parents : Une économie radicale par rapport aux répétiteurs privés. Pour 2 €, l'enfant bénéficie d'une technologie d'élite toute l'année.
+•	Pour la Société : Un modèle sans investissement matériel lourd (Hardware financé par la collecte) et une forte rentabilité dès la deuxième année.
+L'Argument de la "Trajectoire de Réussite" (6ème à la Terminale)
+1. La fin des lacunes cumulées « Le plus gros problème à Madagascar, c'est l'accumulation des lacunes. Un enfant qui ne comprend pas les fractions en 6ème sera perdu en 3ème. Avec l'IA disponible dès la 6ème, chaque blocage est traité immédiatement. L'élève arrive au Bac avec des bases en béton, car il a eu un tuteur personnel pendant 7 ans. »
+2. La familiarisation technologique « En utilisant notre borne IA chaque semaine, l'élève développe une agilité numérique rare. Il ne subit pas la technologie, il apprend à l'interroger (le "prompting"). C'est une compétence que les élèves des pays développés acquièrent déjà ; nous offrons la même chance aux élèves malgaches. »
+ 
+L'Argument du Futur : Le Télétravail International
+C'est ici que vous vendez du rêve concret aux parents et à l'État :
+3. Préparer aux métiers de demain « Demain, le marché du travail pour un jeune Malgache ne s'arrêtera pas aux frontières de l'île. Le télétravail international (IT, analyse de données, ingénierie) est une opportunité historique. Mais pour décrocher ces postes payés aux standards internationaux, il faut deux choses :
+•	Un niveau scientifique irréprochable.
+•	Une maîtrise parfaite des outils d'intelligence artificielle. »
+4. L'IA comme passeport pour l'emploi « Notre projet ne forme pas seulement des bacheliers, il forme des "travailleurs du futur". Un enfant qui a utilisé une IA scientifique pendant 7 ans sera naturellement plus performant pour travailler à distance pour des entreprises européennes ou américaines depuis Madagascar. C'est la solution pour stopper la fuite des cerveaux tout en faisant entrer des devises dans le pays. »
+ 
+Comment l'ajouter à votre fiche projet (Section 5 : Impact Long Terme)
+Vision 2030 : Construire une nation de talents numériques
+•	Continuité pédagogique : Un accompagnement de la 6ème à la Terminale pour garantir 100% de maîtrise des fondamentaux scientifiques.
+•	Employabilité mondiale : Préparer la jeunesse malgache au télétravail international. En maîtrisant l'IA dès le collège, nos élèves deviennent les candidats les plus compétitifs sur le marché mondial des services numériques.
+ 
+Pourquoi cet argument justifie les 3,50 € ?
+Pour un parent, payer 2 euros par an (10 000 Ar) n'est plus une dépense pour "réussir un contrôle", c'est un investissement pour que leur enfant puisse, plus tard, gagner un salaire international en restant à Madagascar. C'est un argument émotionnel et rationnel imbattable.
+
+"Souveraineté Technologique" : Madagascar en Pionnier
+1. Un modèle plus agile que l'Europe « En Europe, les systèmes éducatifs sont souvent lourds et dépendants d'une connectivité totale (Cloud). En installant une IA locale et hors-ligne, Madagascar déploie une solution plus résiliente et plus adaptée aux enjeux climatiques et énergétiques actuels. C'est une innovation de rupture que beaucoup de zones rurales européennes pourraient nous envier. »
+2. L'apprentissage de la "Co-intelligence" dès le plus jeune âge « Alors que les pays européens débattent encore de l'interdiction ou non de l'IA à l'école, Madagascar prend le parti de l'intégration intelligente. En formant nos élèves à collaborer avec l'IA dès la 6ème, nous créons une génération de "natifs de la IA" qui auront une longueur d'avance sur les étudiants européens qui utilisent l'IA de manière cachée ou non encadrée. »
+3. Le concept de "Leapfrogging" (Saut technologique) « Tout comme l'Afrique a sauté l'étape du téléphone fixe pour passer directement au mobile, Madagascar peut sauter l'étape des manuels scolaires papier coûteux et obsolètes pour passer directement à l'enseignement assisté par IA. Ce modèle est le futur de l'éducation mondiale : local, peu coûteux, et ultra-performant. »
+ 
+Impact sur le Télétravail (La suite logique)
+« En étant en avance sur l'usage de l'IA par rapport à l'Europe, nos jeunes deviennent des experts naturels du travail de demain. Un recruteur international cherchera demain quelqu'un qui sait utiliser l'IA pour décupler sa productivité. Grâce à ce projet, ce talent sera malgache. »
+ 
+Mise à jour de votre argumentaire "Vendre le Projet" :
+POURQUOI NOUS SOMMES EN AVANCE :
+•	Innovation d'usage : Là où l'Occident mise sur le tout-connecté fragile, nous créons une intelligence locale robuste.
+•	Éducation 3.0 : Nous transformons l'ordinateur de classe en un super-tuteur mondial, dépassant les méthodes de soutien scolaire classiques utilisées en Europe.
+•	Compétitivité : Nous offrons à Madagascar l'opportunité de former des cadres capables de rivaliser avec n'importe quel ingénieur international sur les plateformes de télétravail.
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <script>
+    // 1) Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('in');
+      });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // 2) Counters (animate once)
+    let countersDone = false;
+    const counterIO = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && !countersDone){
+          countersDone = true;
+          document.querySelectorAll('.num[data-count]').forEach(el=>{
+            const target = parseFloat(el.dataset.count);
+            const suffix = el.dataset.suffix || "";
+            const isFloat = String(target).includes(".");
+            const duration = 900;
+            const start = performance.now();
+            function tick(t){
+              const p = Math.min(1, (t - start) / duration);
+              const v = target * (0.18 + 0.82*p);
+              const out = isFloat ? (Math.round(v*10)/10) : Math.round(v);
+              el.textContent = out + suffix;
+              if(p < 1) requestAnimationFrame(tick);
+              else el.textContent = target + suffix;
+            }
+            requestAnimationFrame(tick);
+          });
+        }
+      });
+    }, {threshold:.18});
+    const statsPanel = document.querySelector('.panel.reveal');
+    if(statsPanel) counterIO.observe(statsPanel);
+
+    // 3) Chart
+    new Chart(document.getElementById('financeChart'),{
+      type:'doughnut',
+      data:{
+        labels:[
+          'ÉTAT – Équipement et modernisation : 2,00 € / élève / an (≈ 7 500 Ariary)',
+          'SOCIÉTÉ – Licence logicielle IA & installation : 1,50 € / élève / an'
+        ],
+        datasets:[{ data:[2.0,1.5], borderWidth:1 }]
+      },
+      options:{
+        responsive:true,
+        plugins:{
+          legend:{ position:'bottom', labels:{ boxWidth:14, boxHeight:14, font:{ family:'Poppins', size:12, weight:'700' } } },
+          tooltip:{ callbacks:{ label:(ctx)=> ` ${ctx.label}` } }
+        },
+        cutout:'62%'
+      }
+    });
+
+    // 4) PDF
+    function downloadPDF(){
+      const el = document.getElementById("pdfArea");
+      html2pdf().set({
+        filename:'Projet_StationIA_Scientifique_Axokit.pdf',
+        margin:[8,8,10,8],
+        html2canvas:{scale:2, useCORS:true, backgroundColor:'#ffffff'},
+        jsPDF:{format:'a4', orientation:'portrait'}
+      }).from(el).save();
+    }
+
+    // 5) Render texte proprement sans changer aucun mot
+    const raw = document.getElementById('rawText').textContent.replace(/\r/g,'');
+    const lines = raw.split('\n');
+
+    const doc = document.getElementById('doc');
+
+    function el(tag, cls){
+      const x = document.createElement(tag);
+      if(cls) x.className = cls;
+      return x;
+    }
+
+    function addSection(title, tagText, tagCls){
+      const s = el('section','section reveal');
+      const head = el('div','stitle');
+      const h = el('h2');
+      h.textContent = title;
+      const t = el('span','tag ' + (tagCls||''));
+      t.textContent = tagText || '';
+      head.appendChild(h);
+      if(tagText) head.appendChild(t);
+      s.appendChild(head);
+      doc.appendChild(s);
+      io.observe(s);
+      return s;
+    }
+
+    // Helpers for formatting while preserving exact line text
+    function addParagraph(parent, text){
+      const p = el('p','para');
+      p.textContent = text; // exact text
+      parent.appendChild(p);
+    }
+    function addQuote(parent, text){
+      const q = el('div','quote');
+      q.textContent = text; // exact text
+      parent.appendChild(q);
+    }
+    function addList(parent, items){
+      const ul = el('ul','list');
+      items.forEach(it=>{
+        const li = document.createElement('li');
+        li.textContent = it; // exact text
+        ul.appendChild(li);
+      });
+      parent.appendChild(ul);
+    }
+
+    // Parse into 5 sections based on headings (without altering content)
+    const sections = [
+      {key:'1. MODÈLE DE FINANCEMENT PARTAGÉ', title:'1. MODÈLE DE FINANCEMENT PARTAGÉ', tag:'Gold', cls:'gold'},
+      {key:'2. STRATÉGIE D’ÉQUIPEMENT ET MONTÉE EN PUISSANCE', title:'2. STRATÉGIE D’ÉQUIPEMENT ET MONTÉE EN PUISSANCE', tag:'Bleu', cls:'blue'},
+      {key:'3. POINTS CLÉS POUR L’ÉTAT', title:'3. POINTS CLÉS POUR L’ÉTAT', tag:'Vert', cls:'green'},
+      {key:'4. FONCTIONNEMENT : LA "BORNE DE SAVOIR"', title:'4. FONCTIONNEMENT : LA "BORNE DE SAVOIR"', tag:'Gold', cls:'gold'},
+      {key:'5. ARGUMENTS STRATÉGIQUES', title:'5. ARGUMENTS STRATÉGIQUES', tag:'Rouge', cls:'red'}
+    ];
+
+    // Build an index of line positions
+    function findIndex(txt){
+      return lines.findIndex(l => l.trim() === txt.trim());
+    }
+    const idx = sections.map(s=>findIndex(s.key));
+
+    // slice ranges
+    function sliceBetween(a, b){
+      const start = a;
+      const end = (b === -1) ? lines.length : b;
+      return lines.slice(start, end);
+    }
+
+    // Intro block (first two lines)
+    const intro = addSection('PROJET : STATION IA SCIENTIFIQUE (OFFLINE)','Synthèse','blue');
+    addParagraph(intro, lines[0].trim());
+    addParagraph(intro, lines[1].trim());
+
+    // Render each section block
+    for(let i=0;i<sections.length;i++){
+      const sdef = sections[i];
+      const start = idx[i];
+      const next = (i<sections.length-1) ? idx[i+1] : -1;
+      const block = sliceBetween(start, next);
+
+      const sec = addSection(sdef.title, sdef.tag, sdef.cls);
+
+      // remove the heading line itself from the content render (we already show it as title)
+      const body = block.slice(1);
+
+      // Collect bullets
+      let bullet = [];
+      let check = [];
+      let small = [];
+      let paragraphs = [];
+
+      // Planning table capture
+      let planningHeaderAt = -1;
+      for(let j=0;j<body.length;j++){
+        if(body[j].startsWith('Heures\tLundi')){ planningHeaderAt = j; break; }
+      }
+
+      // If planning table exists, split: pre-table / table / post-table
+      let pre = body, tablePart = null, post = [];
+      if(planningHeaderAt !== -1){
+        pre = body.slice(0, planningHeaderAt);
+        // header + 5 rows
+        const rows = body.slice(planningHeaderAt, planningHeaderAt + 6);
+        tablePart = rows;
+        post = body.slice(planningHeaderAt + 6);
+      }
+
+      function renderLines(arr){
+        let listBul = [];
+        let listCheck = [];
+        let listO = [];
+        arr.forEach(line=>{
+          const t = line.trim();
+          if(!t) return;
+
+          // keep exact line text in appropriate structure
+          if(t.startsWith('•')){
+            listBul.push(t.replace(/^•\s*/,'• ')); // only normalize ONE space after bullet, keeps words
+            return;
+          }
+          if(t.startsWith('✔️')){
+            listCheck.push(t);
+            return;
+          }
+          if(t.startsWith('o\t') || t.startsWith('o ')){
+            listO.push(t);
+            return;
+          }
+          // numbered lines are important: show as paragraph (exact)
+          if(/^\d+\./.test(t)){
+            addQuote(sec, t);
+            return;
+          }
+          // quote style lines with « »: show as quote box but keep exact
+          if(t.includes('«') || t.includes('»')){
+            addQuote(sec, t);
+            return;
+          }
+          // default: paragraph
+          addParagraph(sec, t);
+        });
+
+        if(listBul.length) addList(sec, listBul);
+        if(listO.length) addList(sec, listO);
+        if(listCheck.length) addList(sec, listCheck);
+      }
+
+      renderLines(pre);
+
+      // Add special modern finance table for section 1 (using exact wording from your text)
+      if(sdef.key === '1. MODÈLE DE FINANCEMENT PARTAGÉ'){
+        const tbl = el('table','ftable');
+        tbl.innerHTML = `
+          <thead>
+            <tr>
+              <th>Répartition annuelle du financement (par élève)</th>
+              <th>Montant</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ÉTAT – Équipement et modernisation</td>
+              <td>2,00 € / élève / an (≈ 7 500 Ariary)</td>
+            </tr>
+            <tr>
+              <td>SOCIÉTÉ – Licence logicielle IA & installation</td>
+              <td>1,50 € / élève / an</td>
+            </tr>
+            <tr>
+              <td><b>Total</b></td>
+              <td><b>3,50 € / élève / an</b></td>
+            </tr>
+          </tbody>
+        `;
+        sec.appendChild(tbl);
+      }
+
+      // Planning table (dynamic + futuristic) with exact cells from your table lines
+      if(tablePart){
+        const headerCells = tablePart[0].split('\t');
+        const tbl = el('table','ftable');
+        const thead = document.createElement('thead');
+        const trh = document.createElement('tr');
+        headerCells.forEach(c=>{
+          const th = document.createElement('th');
+          th.textContent = c; // exact
+          trh.appendChild(th);
+        });
+        thead.appendChild(trh);
+        tbl.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        tablePart.slice(1).forEach(r=>{
+          const cells = r.split('\t');
+          const tr = document.createElement('tr');
+          cells.forEach(c=>{
+            const td = document.createElement('td');
+            td.textContent = c; // exact
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+        tbl.appendChild(tbody);
+
+        // Insert title line (exact) just above the table if it exists in post/pre already,
+        // otherwise table still stands.
+        sec.appendChild(tbl);
+      }
+
+      renderLines(post);
+    }
+
+    // Observe all reveals created dynamically
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>

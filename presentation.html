@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Station IA Scientifique – Axokit</title>
+
+<style>
+:root{
+--blue:#0b3c6f;
+--gold:#d4af37;
+--green:#16a34a;
+--bg:#f4f7ff;
+--card:#fff;
+--text:#0b1220;
+--radius:18px;
+}
+
+body{
+margin:0;
+font-family:system-ui,Segoe UI,Roboto;
+background:var(--bg);
+color:var(--text);
+}
+
+header{
+background:linear-gradient(135deg,#0b3c6f,#051c33);
+color:white;
+padding:50px 20px;
+text-align:center;
+}
+
+header img{
+height:70px;
+margin-bottom:20px;
+}
+
+section{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.card{
+background:var(--card);
+border-radius:var(--radius);
+padding:30px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+margin-bottom:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+img.full{
+width:100%;
+border-radius:12px;
+margin-top:15px;
+}
+
+.badge{
+background:var(--gold);
+padding:6px 14px;
+border-radius:20px;
+display:inline-block;
+font-weight:600;
+margin-bottom:10px;
+}
+
+/* badge financement petit */
+.badge-finance{
+margin:8px 0 14px;
+display:inline-flex;
+align-items:center;
+gap:6px;
+background:#f3fbf6;
+border:1px solid #cfe9da;
+padding:5px 12px;
+border-radius:14px;
+font-weight:600;
+color:#166534;
+font-size:13px;
+}
+.badge-finance img{height:16px}
+
+/* montants */
+.money-gold{
+background:var(--gold);
+color:#111;
+padding:8px 18px;
+border-radius:999px;
+font-weight:800;
+display:inline-block;
+margin:6px 0 10px;
+box-shadow:0 5px 12px rgba(212,175,55,.35);
+}
+
+.money-green{
+background:var(--green);
+color:white;
+padding:8px 18px;
+border-radius:999px;
+font-weight:800;
+display:inline-block;
+margin:6px 0 10px;
+box-shadow:0 5px 12px rgba(22,163,74,.35);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+
+th{background:#eef2ff}
+
+.highlight{
+background:#eef4ff;
+border-left:6px solid var(--gold);
+padding:15px;
+margin:15px 0;
+}
+
+footer{
+background:#111;
+color:#ccc;
+text-align:center;
+padding:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="logoaxokit.png">
+<h1>STATION IA SCIENTIFIQUE (OFFLINE)</h1>
+<p>L’excellence pédagogique scientifique pour Madagascar</p>
+</header>
+
+<section>
+
+<div class="card">
+<span class="badge">Vision</span>
+<p>Déploiement de Cerveaux Numériques IA dans les collèges et lycées publics.</p>
+<img src="scolaire.png" class="full">
+</div>
+
+<div class="card grid">
+
+<div>
+<h2>Technologie</h2>
+<ul>
+<li>IA locale RTX</li>
+<li>Sans Internet</li>
+<li>Maths / Physique / chimie</li>
+<li>Réponses instantanées</li>
+</ul>
+</div>
+
+<div>
+<img src="numerique.png" class="full">
+</div>
+
+</div>
+
+<div class="card">
+<h2>Modèle économique</h2>
+
+<div class="badge-finance">
+Financé par <img src="logoaxokit.png"> (en autofinancement)*
+</div>
+
+<div class="grid">
+
+<div>
+<h3>Année 1</h3>
+<div class="money-gold">3,50 € / élève</div>
+<ul>
+<li>Matériel</li>
+<li>Licence IA</li>
+<li>Installation</li>
+</ul>
+</div>
+
+<div>
+<h3>Années suivantes</h3>
+<div class="money-green">1,5 € / élève / an</div>
+<ul>
+<li>Mises à jour</li>
+<li>Maintenance</li>
+<li>Support</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<h2>Bénéfices pédagogiques</h2>
+
+<div class="grid">
+<img src="epp.png" class="full">
+<img src="jeune.png" class="full">
+<img src="lycee.png" class="full">
+</div>
+
+<ul>
+<li>Laboratoires virtuels</li>
+<li>Remédiation personnalisée</li>
+<li>Anglais intensif</li>
+<li>Égalité des chances</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Comparatif</h2>
+
+<table>
+<tr>
+<th>Critère</th><th>Manuels papier</th><th>Cerveau IA</th>
+</tr>
+
+<tr><td>Information</td><td>Statique</td><td>Dynamique</td></tr>
+<tr><td>Interactivité</td><td>Nulle</td><td>Totale</td></tr>
+<tr><td>Coût 5 ans</td><td>Élevé</td><td>Faible</td></tr>
+<tr><td>Disponibilité</td><td>Limitée</td><td>Classe entière</td></tr>
+<tr><td>Internet</td><td>Non</td><td>Non</td></tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Vision 2030</h2>
+
+<div class="highlight">
+Former une génération scientifique prête pour le télétravail international.
+</div>
+
+<ul>
+<li>Souveraineté technologique</li>
+<li>Natifs de l’IA</li>
+<li>Leapfrogging éducatif</li>
+<li>Talents numériques malgaches</li>
+</ul>
+
+</div>
+
+</section>
+
+<footer>
+Projet Station IA Scientifique – Axokit<br>
+© Éducation 3.0 Madagascar
+</footer>
+
+</body>
+</html>

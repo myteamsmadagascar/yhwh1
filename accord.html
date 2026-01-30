@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Avantages — Axokit</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+:root{
+--blue:#2563eb;
+--gold:#d4af37;
+--green:#16a34a;
+--red:#c1121f;
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Poppins;
+background:
+radial-gradient(800px 400px at 10% 10%, rgba(37,99,235,.15), transparent 60%),
+radial-gradient(800px 400px at 90% 20%, rgba(212,175,55,.18), transparent 60%),
+linear-gradient(180deg,#f8fbff,#eef2ff);
+}
+
+.wrap{max-width:1100px;margin:auto;padding:14px}
+
+.topbar{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+justify-content:flex-end;
+margin-bottom:12px;
+}
+
+.btn{
+padding:8px 12px;
+border-radius:10px;
+border:1px solid #ccd;
+background:white;
+font-weight:800;
+font-size:13px;
+cursor:pointer;
+}
+
+.btn.blue{background:#2563eb;color:white;border:none}
+.btn.red{background:#c1121f;color:white;border:none}
+
+.card{
+background:white;
+border-radius:22px;
+box-shadow:0 20px 60px rgba(0,0,0,.08);
+overflow:hidden;
+}
+
+header{
+display:flex;
+gap:12px;
+align-items:center;
+padding:16px;
+border-bottom:1px solid #dde;
+}
+
+header img{height:55px}
+
+h1{margin:0;font-size:18px;color:#c1121f}
+
+.section{
+padding:16px;
+border-bottom:1px solid #eee;
+}
+
+.section:last-child{border:none}
+
+.section h2{
+margin-top:0;
+color:#2563eb;
+font-size:15px;
+}
+
+.block{
+white-space:pre-wrap;
+line-height:1.75;
+font-size:14px;
+color:#111;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+font-size:13px;
+}
+
+th,td{
+border:1px solid #ccd4ff;
+padding:8px;
+vertical-align:top;
+}
+
+th{
+background:#eef2ff;
+}
+
+.quote{
+margin-top:10px;
+padding:12px;
+border-left:4px solid var(--gold);
+background:#fff9e6;
+font-weight:600;
+white-space:pre-wrap;
+}
+
+.footer{
+padding:12px;
+text-align:center;
+font-weight:800;
+color:#555;
+font-size:12px;
+}
+
+@media(max-width:700px){
+.block{font-size:13px}
+table{font-size:11px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="topbar">
+<button class="btn" onclick="location.href='index.html'">Accueil</button>
+<button class="btn" onclick="location.href='plan-national.html'">Plan national</button>
+<button class="btn" onclick="location.href='comprendre.html'">Comprendre</button>
+<button class="btn" onclick="location.href='pc.html'">Configuration PC</button>
+<button class="btn blue" onclick="window.open('https://www.axokit.com')">Voir l’application</button>
+<button class="btn red" onclick="downloadPDF()">PDF</button>
+</div>
+
+<div class="card" id="pdfArea">
+
+<header>
+<img src="logoaxokit.png">
+<h1>"Offre d'Équité Numérique par la Souveraineté Technologique"</h1>
+</header>
+
+<div class="section">
+<div class="block">
+1. La Vision : Zéro Fracture Numérique
+"Notre mission est qu'aucun enfant malgache, qu'il soit dans une EPP de brousse ou dans un lycée d'élite à Tana, ne soit laissé derrière par la révolution de l'Intelligence Artificielle."
+</div>
+</div>
+
+<div class="section">
+<div class="block">
+2. Le Deal : Le Modèle de "Péréquation Nationale"
+Nous proposons une convention de partenariat basée sur un équilibre simple :
+• Côté PUBLIC (Gratuité totale) :
+o L'application est fournie gratuitement à tous les établissements publics (CEG, Lycées).
+o Zéro coût de licence pour l'État.
+o Mises à jour pédagogiques gratuites à vie.
+• Côté PRIVÉ (La contrepartie) :
+o L'État rend l'utilisation de l'IA obligatoire ou recommandée dans le cursus scolaire national.
+o L'État autorise notre entreprise à collecter des frais de licence auprès des établissements privés (selon les tarifs 2 €, 5 €, 20 €).
+o L'État facilite l'intégration de l'application dans les listes de fournitures agréées.
+</div>
+</div>
+
+<div class="section">
+<h2>3. Pourquoi l'État est-il gagnant ?</h2>
+
+<table>
+<tr><th>Avantages pour l'État</th><th>Détails</th></tr>
+<tr><td>Économie massive</td><td>L'État équipe le public avec une technologie de pointe sans dépenser un seul Ariary en logiciels (économie de plusieurs millions d'euros).</td></tr>
+<tr><td>Souveraineté</td><td>L'IA tourne en local, sans internet. Les données des élèves restent à Madagascar.</td></tr>
+<tr><td>Résultats Scolaires</td><td>Un tuteur IA disponible 24h/24 pour aider les enseignants surchargés et améliorer le taux de réussite au BEPC et au BAC.</td></tr>
+<tr><td>Image Politique</td><td>Madagascar devient le premier pays d'Afrique à généraliser l'IA dans l'éducation publique gratuitement.</td></tr>
+</table>
+</div>
+
+<div class="section">
+<div class="block">
+4. Pourquoi le Privé acceptera-t-il ?
+Si l'État valide l'application pour le public, elle devient le Standard National.
+• Une école privée qui n'a pas l'application sera perçue comme "dépassée".
+• Les parents du privé acceptent de payer car ils savent que leur contribution finance indirectement la gratuité pour les enfants les plus pauvres du pays (Responsabilité Sociale).
+
+5. Résumé de l'Impact (Chiffres Clés)
+• Impact Social : +1 500 000 élèves du public accèdent à l'IA gratuitement.
+• Viabilité Économique : Le projet est auto-financé par les ~1 000 000 d'élèves du privé.
+• Indépendance : Le projet ne dépend d'aucune aide internationale ou donateur étranger.
+</div>
+</div>
+
+<div class="section">
+<h2>La Proposition de Partenariat Stratégique et SAV (Service Après-Vente) humain</h2>
+
+<div class="quote">
+"Monsieur le Ministre, nous ne sollicitons aucun budget de l'État. Nous demandons un accord-cadre nous permettant de déployer notre solution dans le secteur privé.
+Une part de ces revenus sera directement réallouée pour garantir au secteur public :
+1. La gratuité totale de l'application et de ses mises à jour.
+2. Un suivi hotline dédié, permettant aux enseignants de bénéficier d'une assistance technique immédiate.
+3. L'intervention de nos techniciens sur place en cas de besoin, pour assurer la continuité pédagogique.
+Ce modèle de solidarité numérique permet d'équiper et d'accompagner l'éducation nationale sans peser sur les finances publiques, en faisant du secteur privé le moteur de l'innovation pour tous."
+</div>
+</div>
+
+<div class="footer">
+Axokit — Équité Numérique • Souveraineté Technologique
+</div>
+
+</div>
+</div>
+
+<script>
+function downloadPDF(){
+html2pdf().from(document.getElementById("pdfArea")).save("Avantages_Axokit.pdf");
+}
+</script>
+
+</body>
+</html>

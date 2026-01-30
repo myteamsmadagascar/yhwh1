@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Achat en gros – Axokit</title>
+
+<style>
+:root{
+--gold:#d4af37;
+--red:#ff2d55;
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:system-ui,Segoe UI,Roboto;
+background:
+radial-gradient(800px 400px at 10% 10%,rgba(212,175,55,.12),transparent),
+radial-gradient(800px 400px at 90% 20%,rgba(255,45,85,.10),transparent),
+linear-gradient(180deg,#ffffff,#f1f5ff);
+color:#0b1220;
+}
+
+/* TOP NAV */
+
+nav{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+padding:12px;
+background:white;
+position:sticky;
+top:0;
+z-index:99;
+border-bottom:1px solid #ddd;
+}
+
+nav a{
+text-decoration:none;
+padding:10px 18px;
+border-radius:30px;
+font-weight:900;
+border:2px solid var(--gold);
+color:black;
+}
+
+/* HEADER */
+
+header{
+text-align:center;
+padding:40px 15px;
+background:linear-gradient(135deg,#1f4fd8,#ff2d55);
+color:white;
+}
+
+.logo{height:70px}
+
+.badge{
+display:inline-block;
+margin-top:10px;
+padding:8px 18px;
+border-radius:999px;
+font-weight:900;
+background:linear-gradient(90deg,var(--gold),var(--red));
+box-shadow:0 0 15px rgba(212,175,55,.8);
+}
+
+.hero-btn{
+display:inline-block;
+margin:10px 6px;
+padding:12px 24px;
+border-radius:22px;
+font-weight:900;
+background:white;
+color:black;
+border:2px solid var(--gold);
+text-decoration:none;
+}
+
+/* CONTENT */
+
+section{
+max-width:1100px;
+margin:auto;
+padding:25px;
+}
+
+.card{
+background:white;
+border-radius:28px;
+padding:26px;
+margin-bottom:28px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+h2{
+border-left:6px solid #1f4fd8;
+padding-left:12px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+th,td{
+border:1px solid #ccd4ff;
+padding:10px;
+}
+
+th{background:#f0f4ff}
+
+.highlight{
+background:#eef3ff;
+border-left:6px solid var(--red);
+padding:15px;
+font-weight:700;
+margin:15px 0;
+}
+
+/* FLOATING WHATSAPP */
+
+.wa-float{
+position:fixed;
+bottom:22px;
+right:22px;
+width:58px;
+height:58px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+background:linear-gradient(135deg,#25D366,#128C7E);
+color:white;
+text-decoration:none;
+box-shadow:0 0 25px rgba(37,211,102,.7);
+z-index:999;
+}
+
+/* BACK BUTTON */
+
+.back-btn{
+position:fixed;
+bottom:22px;
+left:22px;
+padding:12px 22px;
+border-radius:18px;
+border:2px solid var(--gold);
+background:white;
+font-weight:900;
+cursor:pointer;
+box-shadow:0 0 18px rgba(212,175,55,.6);
+z-index:999;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:30px;
+color:#666;
+font-weight:600;
+}
+
+@media(max-width:600px){
+nav a{flex:1;text-align:center}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">Accueil</a>
+<a href="presentation.html">Presentation</a>
+<a href="projet.html">Projet</a>
+<a href="lettre.html">Lettre adressee a Son Excellence</a>
+<a href="pc.html">PC</a>
+</nav>
+
+<header>
+
+<img src="logoaxokit.png" class="logo"><br>
+
+<h1>Achat en Gros & Preparation Usine</h1>
+
+<span class="badge">PROJET ETATIQUE</span>
+
+<br><br>
+
+<a class="hero-btn" href="https://www.axokit.com" target="_blank">Voir l application</a>
+<button class="hero-btn" onclick="window.print()">Telecharger PDF</button>
+
+</header>
+
+<section>
+
+<div class="card">
+
+<h2>Simulation baisse de prix</h2>
+
+<table>
+<tr><th>Composant</th><th>Public</th><th>Volume</th></tr>
+<tr><td>CPU + GPU</td><td>350 €</td><td>240 €</td></tr>
+<tr><td>Carte mere + RAM + SSD</td><td>120 €</td><td>85 €</td></tr>
+<tr><td>Boitier + alim</td><td>80 €</td><td>45 €</td></tr>
+<tr><th>Total</th><th>550 €</th><th>370 €</th></tr>
+</table>
+
+<div class="highlight">
+Reduction estimee 30 a 35%. Jusqu a 5200 ordinateurs avec le meme budget.
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Preconfiguration usine</h2>
+
+<div class="highlight">
+BIOS power limit CPU 45W  
+GPU power limit 120W  
+Alerte thermique 75C
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Cahier des charges</h2>
+
+<ul>
+<li>CPU i5</li>
+<li>RTX 3060 12Go</li>
+<li>16Go RAM</li>
+<li>SSD NVMe</li>
+<li>Carte mere tropicalisee</li>
+<li>Alim 80+ Bronze</li>
+<li>Boitier 3 ventilateurs</li>
+</ul>
+
+</div>
+
+</section>
+
+<footer>
+Axokit – Station IA Scientifique – Madagascar<br>
+Former aujourd hui les talents de demain
+</footer>
+
+<!-- WhatsApp flottant -->
+<a href="https://wa.me/261332943007" class="wa-float" target="_blank">💬</a>
+
+<!-- Bouton retour -->
+<button class="back-btn" onclick="history.back()">← Retour</button>
+
+</body>
+</html>

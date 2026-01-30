@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Contact – Axokit</title>
+
+<style>
+:root{
+--blue:#1f4fd8;
+--gold:#d4af37;
+--bg:#f4f7ff;
+--card:#ffffff;
+--text:#0b1220;
+--muted:#6b7280;
+}
+
+body{
+margin:0;
+font-family:system-ui,Segoe UI,Roboto,Arial;
+background:var(--bg);
+color:var(--text);
+}
+
+.topBar{
+height:4px;
+background:linear-gradient(90deg,var(--gold),var(--blue));
+}
+
+.wrap{
+max-width:900px;
+margin:auto;
+padding:40px 20px 60px;
+text-align:center;
+}
+
+.logo{height:70px}
+
+h1{color:var(--blue);margin:15px 0 6px}
+
+.slogan{
+font-weight:800;
+color:#444;
+margin-bottom:30px;
+}
+
+.card{
+background:var(--card);
+border-radius:14px;
+padding:26px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+border:1px solid #e3e8ff;
+text-align:left;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:14px;
+margin-bottom:25px;
+}
+
+@media(max-width:800px){
+.grid{grid-template-columns:1fr}
+}
+
+.contactCol{
+border:1px solid #e5e7eb;
+border-radius:10px;
+padding:14px;
+}
+
+.contactCol b{
+display:block;
+margin-bottom:6px;
+}
+
+.contactCol a{
+display:block;
+color:var(--blue);
+text-decoration:none;
+font-weight:700;
+margin-top:4px;
+}
+
+label{
+display:block;
+margin-top:10px;
+font-weight:800;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin-top:6px;
+border-radius:8px;
+border:1px solid #ccc;
+font-family:inherit;
+}
+
+button{
+margin-top:18px;
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
+background:var(--blue);
+color:white;
+font-weight:900;
+cursor:pointer;
+}
+
+footer{
+margin-top:30px;
+text-align:center;
+color:#777;
+font-weight:700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topBar"></div>
+
+<div class="wrap">
+
+<img src="logoaxokit.png" class="logo">
+
+<h1>Contact AXOKIT</h1>
+
+<div class="slogan">
+Ensemble pour l’avenir de l’éducation nationale Malagasy
+</div>
+
+<div class="card">
+
+<div class="grid">
+
+<div class="contactCol">
+<b>Fondateur Axokit (Luxembourg)</b>
+<a href="mailto:direction@axokit.com">direction@axokit.com</a>
+</div>
+
+<div class="contactCol">
+<b>Direction Axokit Madagascar</b>
+<a href="mailto:naomi.nisi@madagascarteletravail.com">naomi.nisi@madagascarteletravail.com</a>
+<a href="tel:+261346697478">+261 34 66 974 78</a>
+</div>
+
+<div class="contactCol">
+<b>Équipe AXOKIT</b>
+<a href="mailto:partenariat@axokit.com">partenariat@axokit.com</a>
+</div>
+
+</div>
+
+<form action="https://formsubmit.co/partenariat@axokit.com" method="POST">
+
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_next" value="merci.html">
+<input type="hidden" name="_subject" value="Demande RDV / Démonstration Axokit">
+
+<label>Nom
+<input name="Nom" required>
+</label>
+
+<label>Email
+<input type="email" name="Email" required>
+</label>
+
+<label>Organisation
+<input name="Organisation">
+</label>
+
+<label>Message
+<textarea name="Message" rows="4"></textarea>
+</label>
+
+<button type="submit">Envoyer la demande</button>
+
+</form>
+
+</div>
+
+<footer>
+Axokit – Station IA Scientifique – Madagascar<br>
+Former aujourd’hui les talents de demain
+</footer>
+
+</div>
+
+</body>
+</html>
