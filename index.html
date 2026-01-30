@@ -16,128 +16,68 @@ text-align:center;
 }
 
 .logo{height:60px;margin:16px auto}
-
 .container{max-width:860px;margin:auto;padding:12px}
 
 .badge{
-display:inline-block;
-background:#1f4fd8;
-color:white;
-padding:6px 14px;
-border-radius:14px;
-font-weight:800;
-margin-bottom:10px;
-font-size:13px;
+display:inline-block;background:#1f4fd8;color:white;
+padding:6px 14px;border-radius:14px;font-weight:800;margin-bottom:10px;font-size:13px;
 }
 
 .bigbtn{
-display:block;
-width:92%;
-margin:8px auto;
-padding:12px;
-border-radius:10px;
-font-weight:800;
-text-decoration:none;
-color:white;
-box-shadow:0 6px 16px rgba(0,0,0,.12);
-font-size:14px;
-}
-.slogan{
-font-weight:900;
-color:#1f4fd8;
-margin:20px 0;
-letter-spacing:.3px;
-animation:fadeGlow 3s ease-in-out infinite;
-text-align:center;
-}
-
-@keyframes fadeGlow{
-0%{
-opacity:.6;
-transform:translateY(6px);
-text-shadow:none;
-}
-50%{
-opacity:1;
-transform:translateY(0);
-text-shadow:0 0 12px rgba(31,79,216,.35);
-}
-100%{
-opacity:.6;
-transform:translateY(6px);
-text-shadow:none;
-}
+display:block;width:92%;margin:8px auto;padding:12px;border-radius:10px;
+font-weight:800;text-decoration:none;color:white;
+box-shadow:0 6px 16px rgba(0,0,0,.12);font-size:14px;
 }
 .blue{background:#1f4fd8}
 .green{background:#16a34a}
 .pink{background:#ff2d55}
 
 .btn{
-display:block;
-width:92%;
-margin:6px auto;
-padding:10px;
-border-radius:10px;
-font-weight:700;
-background:white;
-border:1.5px solid #1f4fd8;
-text-decoration:none;
-color:#0b1220;
-font-size:13px;
+display:block;width:92%;margin:6px auto;padding:10px;border-radius:10px;
+font-weight:700;background:white;border:1.5px solid #1f4fd8;
+text-decoration:none;color:#0b1220;font-size:13px;
 }
 
 .pill{
-display:inline-block;
-margin:4px;
-padding:8px 14px;
-border-radius:999px;
-border:1.5px solid #1f4fd8;
-font-weight:800;
-font-size:13px;
+display:inline-block;margin:4px;padding:8px 14px;border-radius:999px;
+border:1.5px solid #1f4fd8;font-weight:800;font-size:13px;
 }
 
 .card{
-background:white;
-border-radius:18px;
-padding:18px;
-margin:14px 6px;
-box-shadow:0 6px 18px rgba(0,0,0,.10);
-text-align:left;
+background:white;border-radius:18px;padding:18px;margin:14px 6px;
+box-shadow:0 6px 18px rgba(0,0,0,.10);text-align:left;
 }
-
 .card h2{margin-top:0;color:#1f4fd8}
 
-iframe{
-width:100%;
-height:240px;
-border-radius:10px;
-border:none;
-}
+iframe{width:100%;height:240px;border-radius:10px;border:none}
+@media(min-width:768px){iframe{height:340px}}
 
-.videoTitle{
-font-weight:800;
-margin-bottom:6px;
-color:#1f4fd8;
-text-align:center;
-}
+.videoTitle{font-weight:800;margin-bottom:6px;color:#1f4fd8;text-align:center}
 
-@media(min-width:768px){
-iframe{height:340px}
+/* LANGUES */
+.lang{display:inline-block;margin:4px;padding:6px 12px;border-radius:999px;font-weight:800;font-size:12px;color:white}
+.de{background:#000}
+.it{background:#16a34a}
+.es{background:#dc2626}
+.en{background:#2563eb}
+
+.future{margin:8px 0;font-size:13px;font-weight:700;color:#444}
+
+/* SLOGAN ANIMÉ */
+.malagasy{
+font-weight:900;margin:18px 0;font-size:20px;
+background:linear-gradient(90deg,#1f4fd8,#d4af37,#1f4fd8);
+background-size:200%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shine 6s linear infinite;
 }
+@keyframes shine{to{background-position:200%}}
 
 .waFloat{
-position:fixed;
-right:14px;
-bottom:14px;
-width:52px;
-height:52px;
-border-radius:50%;
-background:#25D366;
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 10px 24px rgba(0,0,0,.25);
-z-index:9999;
+position:fixed;right:14px;bottom:14px;width:52px;height:52px;border-radius:50%;
+background:#25D366;display:flex;align-items:center;justify-content:center;
+box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:9999;
 }
 </style>
 </head>
@@ -160,25 +100,32 @@ z-index:9999;
 <span class="pill">Physique</span>
 <span class="pill">Chimie</span>
 </div>
-<h2>
-Extension future prévue : cours de langues (allemand, italien, espagnol, anglais) et synthèse vocale intégrée
-</h2>
-<h2>Ny fianarana no lova tsara indrindra.</h2>
+
+<div class="future">
+Extension future prévue :
+<br>
+<span class="lang de">Allemand</span>
+<span class="lang it">Italien</span>
+<span class="lang es">Espagnol</span>
+<span class="lang en">Anglais</span>
+<br>+ Synthèse vocale intégrée
+</div>
+
+<div class="malagasy">Ny fianarana no lova tsara indrindra.</div>
 
 <a class="bigbtn pink" href="https://www.axokit.com" target="_blank">Découvrir l’application</a>
 <a class="bigbtn blue" href="accord.html">📜 Accord-cadre national</a>
 <a class="bigbtn blue" href="presentation.html">🌍 Présentation globale</a>
-<a class="btn" href="plan-national.html"> Plan national</a>
-<a class="btn" href="lycees-colleges.html"> Lycées & collèges privés</a>
+
+<a class="btn" href="plan-national.html">Plan national</a>
+<a class="btn" href="lycees-colleges.html">Lycées & collèges privés</a>
 <a class="btn" href="maintenance.html">Guide de maintenance</a>
 
-<!-- VIDEO MALAGASY -->
 <div class="card">
 <div class="videoTitle">Présentation Malagasy</div>
 <iframe src="https://www.youtube.com/embed/JX-1kAku6xM" allowfullscreen></iframe>
 </div>
 
-<!-- VIDEO FRANÇAISE -->
 <div class="card">
 <div class="videoTitle">Présentation Française</div>
 <iframe src="https://www.youtube.com/embed/VADZ9RNAMVc" allowfullscreen></iframe>
@@ -187,38 +134,17 @@ Extension future prévue : cours de langues (allemand, italien, espagnol, anglai
 <div class="card">
 <h2>Comprendre le projet</h2>
 
-<p>
-Axokit est une Station d’Intelligence Artificielle Scientifique fonctionnant hors connexion, destinée aux collèges et lycées.
-</p>
+<p>Axokit est une Station d’Intelligence Artificielle Scientifique fonctionnant hors connexion, destinée aux collèges et lycées.</p>
 
-<p>
-Elle permet aux élèves d’améliorer leurs résultats en Mathématiques, Physique et Chimie grâce à un tuteur numérique disponible en permanence, même sans Internet.
-</p>
+<p>Elle permet aux élèves d’améliorer leurs résultats en Mathématiques, Physique et Chimie grâce à un tuteur numérique disponible en permanence.</p>
 
-<p>
-La solution est livrée clé en main : ordinateurs configurés, application installée et accompagnement humain assuré.
-</p>
+<p>Solution clé en main : ordinateurs configurés, application installée et accompagnement humain.</p>
 
-<p>
-Le système est sécurisé, durable, et conçu pour s’adapter aux réalités de Madagascar, y compris dans les zones à faible infrastructure.
-</p>
+<p>Le modèle repose sur une équité numérique nationale : le privé finance le public.</p>
 
-<p>
-Le modèle repose sur une équité numérique nationale : les établissements publics bénéficient gratuitement de l’application, des mises à jour et du support humain, tandis que les établissements privés contribuent par une licence adaptée à leur niveau.
-</p>
+<p>L’État est invité à officialiser l’adoption du numérique éducatif via Axokit, sans engagement financier direct.</p>
 
-<p>
-Cette contribution du privé permet de financer le système, d’assurer les mises à jour, de rémunérer les équipes locales et de garantir la gratuité du public.
-Ainsi, le privé finance le public.
-</p>
-
-<p>
-Il est demandé à l’État d’officialiser l’adoption du numérique éducatif via Axokit, d’intégrer l’outil dans le cursus scolaire national et d’autoriser la collecte des licences dans le privé, sans engagement financier direct.
-</p>
-
-<p>
-Objectif : garantir à chaque élève malgache un accès équitable à une éducation scientifique moderne.
-</p>
+<p><b>Objectif :</b> garantir à chaque élève malgache un accès équitable à une éducation scientifique moderne.</p>
 
 <a class="btn" href="comprendre.html">Lire la présentation complète</a>
 </div>
@@ -246,5 +172,3 @@ Former aujourd’hui les talents de demain
 
 </body>
 </html>
-
-
